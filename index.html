@@ -505,7 +505,8 @@
 <div id="page-about" class="page">
   <div class="wrap">
     <div class="crumb">
-      <a onclick="goTo('main')">🎯 Richa's Portfolio</a>
+      <div class="crumb">
+        <a href="#" onclick="goTo('main'); return false;">← Back</a>
       <span class="sep">/</span>
       <span class="current">🙋 About Me</span>
     </div>
@@ -555,7 +556,8 @@
 <div id="page-education" class="page">
   <div class="wrap">
     <div class="crumb">
-      <a onclick="goTo('main')">🎯 Richa's Portfolio</a>
+      <div class="crumb">
+        <a href="#" onclick="goTo('main'); return false;">← Back</a>
       <span class="sep">/</span>
       <span class="current">📚 Education</span>
     </div>
@@ -588,7 +590,8 @@
 <div id="page-resume" class="page">
   <div class="wrap">
     <div class="crumb">
-      <a onclick="goTo('main')">🎯 Richa's Portfolio</a>
+      <div class="crumb">
+        <a href="#" onclick="goTo('main'); return false;">← Back</a>
       <span class="sep">/</span>
       <span class="current">📄 Resume</span>
     </div>
@@ -652,7 +655,8 @@
 <div id="page-case-connectflow" class="page">
   <div class="wrap">
     <div class="crumb">
-      <a onclick="goTo('main')">🎯 Richa's Portfolio</a>
+      <div class="crumb">
+        <a href="#" onclick="goTo('main'); return false;">← Back</a>
       <span class="sep">/</span>
       <span class="current">📞 ConnectFlow</span>
     </div>
@@ -938,7 +942,8 @@
 <div id="page-case-kaamsetu" class="page">
   <div class="wrap">
     <div class="crumb">
-      <a onclick="goTo('main')">🎯 Richa's Portfolio</a>
+      <div class="crumb">
+        <a href="#" onclick="goTo('main'); return false;">← Back</a>
       <span class="sep">/</span>
       <span class="current">🛠️ KaamSetu</span>
     </div>
@@ -1144,7 +1149,7 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + pageId);
     if(target){ target.classList.add('active'); window.scrollTo(0,0); }
-    history.replaceState(null, '', '#' + pageId);
+    history.pushState(null, '', '#' + pageId);
   }
   function scrollToId(id){
     goTo('main');
@@ -1153,6 +1158,21 @@
       if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
     }, 50);
   }
+  window.addEventListener("popstate", () => {
+
+    const page = location.hash.replace("#","") || "main";
+
+    document.querySelectorAll(".page").forEach(p =>
+        p.classList.remove("active")
+    );
+
+    const target = document.getElementById("page-" + page);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+});
   window.addEventListener('load', ()=>{
     const hash = window.location.hash.replace('#','');
     if(hash) goTo(hash);
